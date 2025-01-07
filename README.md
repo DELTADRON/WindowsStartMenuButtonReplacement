@@ -2,6 +2,7 @@
 A program that replaces Windows Start button image to yours custom.
 
 Image format could be jpg, jpeg, png, bmp.
+
 Image size recomended 16x16px.
 
 Other information in release.
