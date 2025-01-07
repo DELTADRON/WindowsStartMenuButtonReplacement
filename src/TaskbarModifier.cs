@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -6,6 +6,15 @@ using System.Windows.Forms;
 
 namespace WinStartMenuReplacement
 {
+    public class Inf
+    {
+        public static string outmsg { get; set; }
+        public static int Success { get; set; } = 0;
+        public static string Get_result()
+        {
+            return $"Result is {Success}/6\nIf you have more than 0 its Success.\n\nLog:\n" + outmsg;
+        }
+    }
     class StartButtonModifier
     {
         [DllImport("user32.dll", SetLastError = true)]
@@ -80,24 +89,25 @@ namespace WinStartMenuReplacement
             IntPtr hTheme = OpenThemeDataForDpi(IntPtr.Zero, classList, GetDpiForWindow(IntPtr.Zero));
             if (hTheme == IntPtr.Zero)
             {
-                MessageBox.Show("Failed to open theme data.");
+                Inf.outmsg += "Failed to open theme data.\n";
                 return;
             }
 
             if (GetThemeBitmap(hTheme, partId, stateId, propId, GBF_DIRECT, out IntPtr hBitmap) != 0 || hBitmap == IntPtr.Zero)
             {
-                MessageBox.Show("Failed to get start menu bitmap.");
+                Inf.outmsg += $"Failed to get start menu bitmap. {partId}\n";
                 CloseThemeData(hTheme);
                 return;
             }
 
             if (UpdateBitmap(hBitmap, bitmapBytes))
             {
-                Console.WriteLine("The start menu bitmap has been modified.");
+                Inf.outmsg += $"The start menu bitmap has been modified. {partId}\n";
+                Inf.Success++;
             }
             else
             {
-                MessageBox.Show("Failed to modify start menu bitmap.");
+                Inf.outmsg += $"Failed to modify start menu bitmap. {partId}\n";
             }
 
             CloseThemeData(hTheme);
