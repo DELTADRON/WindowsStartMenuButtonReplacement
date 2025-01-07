@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
@@ -15,7 +15,6 @@ namespace WinStartMenuReplacement
         [STAThread]
         static void Main(string[] args)
         {
-            // Best resolution of image that you can give is 16x16px with colors black, white and transperent
             string Winlogon = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon";
             if (args.Length == 0)
             {
@@ -53,7 +52,6 @@ namespace WinStartMenuReplacement
             }
             else if (File.Exists(args[0])) Start_Changing(args[0]); 
             else MessageBox.Show("File not found!");
-            
         }
         static void Start_Changing(string path)
         {
@@ -68,11 +66,11 @@ namespace WinStartMenuReplacement
                 default: Application.Exit(); break;
             }
 
-            for (int i = 1; i <= 7; i++)
-            {
-                byte[] bitmapBytes = modifier.ConvertToBitmapBytes(new Bitmap(path), 16, 16); // Corect modifier.ConvertPngToBitmapBytes(pngPath, 16, 16);
+            for (int i = 1; i <= 7; i++) { 
+                byte[] bitmapBytes = modifier.ConvertToBitmapBytes(new Bitmap(path), 16, 16); 
                 modifier.ModifyStyle("TaskbarPearl", i, 0, 0, bitmapBytes);
             }
+            MessageBox.Show(Inf.Get_result());
         }
 
     }
