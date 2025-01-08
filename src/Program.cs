@@ -18,6 +18,7 @@ namespace WinStartMenuReplacement
             string Winlogon = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon";
             if (args.Length == 0)
             {
+                Inf.Show = true;
                 OpenFileDialog openFileDialog = new OpenFileDialog
                 {
                     Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp",
@@ -70,7 +71,7 @@ namespace WinStartMenuReplacement
                 byte[] bitmapBytes = modifier.ConvertToBitmapBytes(new Bitmap(path), 16, 16); 
                 modifier.ModifyStyle("TaskbarPearl", i, 0, 0, bitmapBytes);
             }
-            MessageBox.Show(Inf.Get_result());
+            Inf.Show_log();
         }
 
     }
