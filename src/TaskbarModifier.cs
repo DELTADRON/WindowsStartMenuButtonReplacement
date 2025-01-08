@@ -10,9 +10,10 @@ namespace WinStartMenuReplacement
     {
         public static string outmsg { get; set; }
         public static int Success { get; set; } = 0;
-        public static string Get_result()
+        public static bool Show { get; set; } = false;
+        public static void Show_log()
         {
-            return $"Result is {Success}/6\nIf you have more than 0 its Success.\n\nLog:\n" + outmsg;
+            if (Show) MessageBox.Show($"Result is {Success}/6\nIf you have more than 0 its Success.\n\nLog:\n" + outmsg);
         }
     }
     class StartButtonModifier
