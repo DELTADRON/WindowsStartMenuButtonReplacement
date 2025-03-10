@@ -25,7 +25,7 @@ namespace WinStartMenuReplacement
                     Title = "Choose an image for the Start menu button"
                 };
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK) Start_Changing(openFileDialog.FileName);
+                if (openFileDialog.ShowDialog() == DialogResult.OK) {Start_Changing(openFileDialog.FileName); Inf.Show_log();}
                 else Console.WriteLine("No file selected.");
 
             }
@@ -71,7 +71,6 @@ namespace WinStartMenuReplacement
                 byte[] bitmapBytes = modifier.ConvertToBitmapBytes(new Bitmap(path), 16, 16); 
                 modifier.ModifyStyle("TaskbarPearl", i, 0, 0, bitmapBytes);
             }
-            Inf.Show_log();
         }
 
     }
